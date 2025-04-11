@@ -1,19 +1,22 @@
 /*タグもの。 多分あまり触らない。*/
 body{
     margin: 0;
+    background-color: #202020;
 }
 /*idもの。 大きな外観*/
 #title {
     background: linear-gradient(90deg,#313131,#000);
     margin: 0;
     padding: 1em 2em 1em 2em;
+    font-size: xx-large;
 }
 #article {
     width: 700px; 
-    background-color: #f0f0f0;
+    background-color: #313131;
     margin: auto;
     border-radius: 20px;
     padding: 0.5em;
+    color: white;
 }
 /*classもの。 小さな外観*/
 .center {
@@ -24,11 +27,14 @@ body{
 .title {
     margin: 1em 0.5em 1em 0.5em;
     padding-left: 0.3em;
-    border-left: 4px solid #000;
+    border-left: 4px solid #fff;
 }
 .gray {
     color: gray;
 }
 .white {
     color: white;
+}
+.black {
+    color: black;
 }
