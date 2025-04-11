@@ -16,14 +16,19 @@ body{
     padding: 0.5em;
 }
 /*classもの。 小さな外観*/
-.white {
-    color: white;
-}
 .center {
+    display: block;
     text-align: center;
+    margin: auto;
 }
 .title {
     margin: 1em 0.5em 1em 0.5em;
     padding-left: 0.3em;
     border-left: 4px solid #000;
+}
+.gray {
+    color: gray;
+}
+.white {
+    color: white;
 }
