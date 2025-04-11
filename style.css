@@ -18,6 +18,13 @@ body{
     padding: 0.5em;
     color: white;
 }
+#footer {
+    background-color: #313131;
+    margin: 0;
+    padding: 1em 2em 1em 2em;
+    color: white;
+    text-align: center;
+}
 /*classもの。 小さな外観*/
 .center {
     display: block;
