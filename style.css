@@ -16,6 +16,13 @@ a:hover {
 a:visited {
     color: #a9f;
 }
+th, td {
+    border: white 1px solid;
+    padding: 0.5em 1.5em;
+}
+table {
+    border-collapse:  collapse;
+}
 /*idもの。 大きな外観*/
 #title {
     background: linear-gradient(90deg,#313131,#000);
