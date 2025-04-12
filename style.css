@@ -1,22 +1,37 @@
-/*タグもの。 多分あまり触らない。*/
+/*フォント読み込み*/
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&display=swap');
+/*タグもの。*/
 body{
     margin: 0;
     background-color: #202020;
+    font-family: "BIZ UDPGothic", sans-serif;
+    line-height: 2em;
+}
+a {
+    color: #58c;
+}
+a:hover {
+    color: #47b;
+}
+a:visited {
+    color: #a9f;
 }
 /*idもの。 大きな外観*/
 #title {
     background: linear-gradient(90deg,#313131,#000);
     margin: 0;
-    padding: 1em 2em 1em 2em;
+    padding: 2em 2em 2em 2em;
     font-size: xx-large;
 }
 #article {
-    width: 700px; 
+    max-width: 700px; 
+    width: 90%;
     background-color: #313131;
     margin: auto;
     border-radius: 20px;
     padding: 0.5em;
     color: white;
+    box-shadow: 0 0 4px 0px #131313;
 }
 #footer {
     background-color: #313131;
