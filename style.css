@@ -23,6 +23,13 @@ th, td {
 table {
     border-collapse:  collapse;
 }
+code, pre {
+    background-color: #202020;
+    max-width: 640px;
+    padding: 0.25em 1em;
+    overflow-x: auto;
+    border-radius: 0.5em;
+}
 /*idもの。 大きな外観*/
 #title {
     background: linear-gradient(90deg,#313131,#000);
@@ -31,7 +38,7 @@ table {
     font-size: xx-large;
 }
 #article {
-    max-width: 700px; 
+    max-width: 720px; 
     width: 90%;
     background-color: #313131;
     margin: auto;
