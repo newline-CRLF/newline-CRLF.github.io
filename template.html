@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+<!--Template ver1.0.0 自動パス調整-->
 <html lang="ja">
     <head>
         <title>CR-LFのホームページ</title>
-        <link href="./style.css" rel="stylesheet" type="text/css" /><!--要パス変更-->
+        <link id="css-link" href="#" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div id="title">
@@ -15,7 +16,14 @@
         <div id="footer">
             <p>&copy; CR-LF 2025- </p>
             <p>このサイトのコンテンツは特に記載がない限り<a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a>で提供されています。</p>
-            <a href="index.html">HOME</a><!--要パス変更-->
+            <a id="home-link" href="#">HOME</a>
         </div>
+        <script>
+            const depth = window.location.pathname.split('/').length - 1;
+            const linkPath = '../'.repeat(depth) + 'index.html';
+            const cssPath = '../'.repeat(depth) + 'style.css';
+            document.getElementById('home-link').href = linkPath;
+            document.getElementById('css-link').href = cssPath;
+        </script>
     </body>
 </html>
