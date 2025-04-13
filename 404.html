@@ -3,11 +3,6 @@
     <head>
         <title>CR-LFのホームページ</title>
         <link href="./style.css" rel="stylesheet" type="text/css" /><!--要パス変更-->
-        <script>
-            const depth = window.location.pathname.split('/').length - 1;
-            const path = '../'.repeat(depth) + 'index.html';
-            document.getElementById('home-link').href = path;
-        </script>
     </head>
     <body>
         <div id="title">
@@ -24,5 +19,10 @@
             <p>このサイトのコンテンツは特に記載がない限り<a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a>で提供されています。</p>
             <a id="home-link" href="#">HOME</a><!--要パス変更-->
         </div>
+        <script>
+            const depth = window.location.pathname.split('/').length - 1;
+            const path = '../'.repeat(depth) + 'index.html';
+            document.getElementById('home-link').href = path;
+        </script>
     </body>
 </html>
