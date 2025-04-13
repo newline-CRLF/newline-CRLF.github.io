@@ -2,7 +2,7 @@
 <html lang="ja">
     <head>
         <title>CR-LFのホームページ</title>
-        <link href="./style.css" rel="stylesheet" type="text/css" /><!--要パス変更-->
+        <link id="css-link" href="#" rel="stylesheet" type="text/css" /><!--要パス変更-->
     </head>
     <body>
         <div id="title">
@@ -21,8 +21,10 @@
         </div>
         <script>
             const depth = window.location.pathname.split('/').length - 1;
-            const path = '../'.repeat(depth) + 'index.html';
-            document.getElementById('home-link').href = path;
+            const linkPath = '../'.repeat(depth) + 'index.html';
+            const cssPath = '../'.repeat(depth) + 'style.css';
+            document.getElementById('home-link').href = linkPath;
+            document.getElementById('css-link').href = cssPath;
         </script>
     </body>
 </html>
