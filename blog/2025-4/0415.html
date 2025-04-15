@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--Template ver1.0.0 自動パス調整-->
+<html lang="ja">
+    <head>
+        <title>CR-LFのホームページ</title>
+        <link id="css-link" href="#" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="title">
+            <h1 class="white center">CR-LF's Home page</h1>
+        </div>
+        <br />
+        <div id="article">
+            <h1 class="title">Discordサーバー作った</h1>
+            <p>4月15日</p>
+            <hr />
+            <p>Discordサーバーを作りました。以下のリンクから入れます。</p>
+            <a href="https://discord.gg/XxUYMSMS">リンク</a>
+            <p>まだ仮ですが1週間以内にいい感じに仕上げます!!</p>
+        </div>
+        <br/>
+        <div id="footer">
+            <p>&copy; CR-LF 2025- </p>
+            <p>このサイトのコンテンツは特に記載がない限り<a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a>で提供されています。</p>
+            <a id="home-link" href="#">HOME</a>
+        </div>
+        <script>
+            const depth = window.location.pathname.split('/').length - 1;
+            const linkPath = '../'.repeat(depth) + 'index.html';
+            const cssPath = '../'.repeat(depth) + 'style.css';
+            document.getElementById('home-link').href = linkPath;
+            document.getElementById('css-link').href = cssPath;
+        </script>
+    </body>
+</html>
