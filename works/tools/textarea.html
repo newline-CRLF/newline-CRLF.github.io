@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>メモ帳</title>
+    <style>
+        * {
+            font-family: "M PLUS Rounded 1c", serif;
+            margin: 0.5em;
+            padding: 0.25em;
+        }
+        body {
+            padding: 0em;
+            margin: 0em;
+            background-color: #f0e7e7;
+        }
+        input, textarea, button {
+            border: solid 1px #b9b1b1;
+            border-radius: 0.5em;
+        }
+        h1 {
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="padding: 0; margin: 0;">メモ帳</h1>
+    <input type="text" id="fileName" placeholder="ファイル名を入力（例: note.txt）" value="note.txt">
+    <br />
+    <textarea id="textArea" rows="10" cols="50" placeholder="ここにメモを入力"></textarea>
+    <br>
+    <button onclick="downloadText()">ダウンロード</button>
+    <input type="file" id="fileInput" accept="text/*" onchange="openFile()">
+    <button onclick="document.getElementById('fileInput').click()">ファイルを開く</button>
+
+    <script>
+        // テキストをダウンロードする関数
+        function downloadText() {
+            const text = document.getElementById('textArea').value;
+            let fileName = document.getElementById('fileName').value.trim();
+            
+            // ファイル名が空の場合のデフォルト
+            if (!fileName) {
+                fileName = 'note.txt';
+            }
+            // 拡張子が含まれていない場合、デフォルトで.txtを追加
+            else if (!/\.[a-zA-Z0-9]+$/.test(fileName)) {
+                fileName += '.txt';
+            }
+
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ファイルを開く関数
+        function openFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('textArea').value = e.target.result;
+                    document.getElementById('fileName').value = file.name;
+                };
+                reader.readAsText(file);
+            }
+        }
+    </script>
+</body>
+</html>
