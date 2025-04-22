@@ -21,10 +21,8 @@
         <script>
             const depth = window.location.pathname.split('/').length - 1;
             const linkPath = '../'.repeat(depth) + 'index.html';
-            const termsPath = '../'.repeat(depth) + 'terms.html';
             const cssPath = '../'.repeat(depth) + 'style.css';
             document.getElementById('home-link').href = linkPath;
-            document.getElementById('terms-link').href = termsPath;
             document.getElementById('css-link').href = cssPath;
         </script>
     </body>
