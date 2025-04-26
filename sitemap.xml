@@ -1,40 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-
+<!--  created with free sitemap generation system www.sitemapxml.jp  --> 
 <url>
   <loc>https://newline-crlf.github.io/</loc>
-  <lastmod>2025-04-19T02:54:38+00:00</lastmod>
-  <priority>1.00</priority>
+  <priority>1.0</priority>
+  <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>https://newline-crlf.github.io/blog/</loc>
-  <lastmod>2025-04-19T02:54:38+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.8</priority>
+  <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>https://newline-crlf.github.io/works/</loc>
-  <lastmod>2025-04-19T02:54:38+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.8</priority>
+  <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>https://newline-crlf.github.io/profile.html</loc>
-  <lastmod>2025-04-19T02:54:38+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.8</priority>
+  <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>https://newline-crlf.github.io/index.html</loc>
-  <lastmod>2025-04-19T02:54:38+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.8</priority>
+  <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>https://newline-crlf.github.io/terms.html</loc>
-  <lastmod>2025-04-19T02:54:38+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.8</priority>
+  <changefreq>daily</changefreq>
 </url>
+<url>
+  <loc>https://newline-crlf.github.io/blog/memo.html</loc>
+  <priority>0.7</priority>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://newline-crlf.github.io/blog/2025-4/index.html</loc>
+  <priority>0.7</priority>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://newline-crlf.github.io/works/tools/textarea.html</loc>
+  <priority>0.7</priority>
+  <changefreq>daily</changefreq>
+</url>
+
 </urlset>
