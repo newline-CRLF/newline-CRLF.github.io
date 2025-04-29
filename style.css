@@ -1,11 +1,12 @@
 /*フォント読み込み*/
-@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&display=swap');
-/*タグもの。*/
+@import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap');/*タグもの。*/
 body{
     margin: 0;
     background-color: #202020;
-    font-family: "BIZ UDPGothic", sans-serif;
+    font-family: "Klee One", sans-serif;
     line-height: 2em;
+    font-weight: 400;
+    font-style: normal;
 }
 a {
     color: #58c;
@@ -15,6 +16,9 @@ a:hover {
 }
 a:visited {
     color: #a9f;
+}
+h1 {
+    font-weight: 600;
 }
 th, td {
     border: white 1px solid;
