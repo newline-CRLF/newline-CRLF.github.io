@@ -1,80 +1,214 @@
-/*フォント読み込み*/
-@import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap');/*タグもの。*/
-body{
-    margin: 0;
-    background-color: #202020;
-    font-family: "Klee One", sans-serif;
-    line-height: 2em;
-    font-weight: 400;
-    font-style: normal;
+/* ──────────────────────────────────────────────── */
+/* ① フォント読み込み                                 */
+/* ──────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap');
+
+/* ──────────────────────────────────────────────── */
+/* ② 変数定義（ここを編集すれば全体の色味を調整可能！） */
+/* ──────────────────────────────────────────────── */
+:root {
+  /* 基本レイアウト */
+  --font-family: "Klee One", sans-serif;
+  --line-height: 2em;
+
+  /* ライトテーマ（デフォルト） */
+  --bg-color: #ffffff;             /* ページ背景 */
+  --text-color: #000000;           /* 文字色 */
+  --link-color: #0066cc;           /* リンク */
+  --link-hover-color: #0055aa;     /* リンクホバー */
+  --link-visited-color: #663399;   /* リンク訪問後 */
+
+  /* コンポーネント背景 */
+  --code-bg: #f5f5f5;              /* code, pre 背景 */
+  --section-bg: #f0f0f0;           /* #article 背景 */
+  --title-bg: #f0f0f0;             /* #title 背景 */
+  --footer-bg: #000000;            /* #footer 背景 */
+  --footer-border: #dddddd;        /* footer 左カラム境界線 */
+
+  /* テキスト on セクション */
+  --article-text: #000000;         /* #article 内文字色 */
+  --footer-text: #ffffff;          /* footer 内文字色 */
+
+  /* その他 */
+  --border-color: #cccccc;         /* table 等の境界線 */
+  --transition: 0.3s ease;         /* カラー切り替えトランジション */
 }
+
+/* ──────────────────────────────────────────────── */
+/* ③ ダークテーマの上書き（data-theme またはシステム設定に対応） */
+/* ──────────────────────────────────────────────── */
+/* HTMLに data-theme="dark" が付与された場合 */
+:root[data-theme="dark"] {
+  --bg-color: #202020;
+  --text-color: #ffffff;
+  --link-color: #58c;
+  --link-hover-color: #47b;
+  --link-visited-color: #a9f;
+
+  --code-bg: #202020;
+  --section-bg: #313131;
+  --title-bg: #1f1f1f;
+  --footer-bg: #000000;
+  --footer-border: #313131;
+
+  --article-text: #ffffff;
+  --footer-text: #ffffff;
+
+  --border-color: #ffffff;
+}
+
+/* システムのダークモード設定にも自動対応 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-color: #202020;
+    --text-color: #ffffff;
+    /* 以下、必要に応じて上書き */
+    --link-color: #58c;
+    --link-hover-color: #47b;
+    --link-visited-color: #a9f;
+    --code-bg: #202020;
+    --section-bg: #313131;
+    --title-bg: #1f1f1f;
+    --footer-bg: #000000;
+    --footer-border: #313131;
+    --article-text: #ffffff;
+    --footer-text: #ffffff;
+    --border-color: #ffffff;
+  }
+}
+
+/* ──────────────────────────────────────────────── */
+/* ④ ベーススタイル（すべてのテーマ共通）               */
+/* ──────────────────────────────────────────────── */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color var(--transition), color var(--transition);
+}
+
 a {
-    color: #58c;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color var(--transition);
 }
 a:hover {
-    color: #47b;
+  color: var(--link-hover-color);
 }
 a:visited {
-    color: #a9f;
+  color: var(--link-visited-color);
 }
-h1 {
-    font-weight: 600;
+
+table {
+  border-collapse: collapse;
 }
 th, td {
-    border: white 1px solid;
-    padding: 0.5em 1.5em;
+  border: var(--border-color) 1px solid;
+  padding: 0.5em 1.5em;
 }
-table {
-    border-collapse:  collapse;
-}
+
 code, pre {
-    background-color: #202020;
-    max-width: 640px;
-    padding: 0.25em 1em;
-    overflow-x: auto;
-    border-radius: 0.5em;
+  background-color: var(--code-bg);
+  max-width: 640px;
+  padding: 0.25em 1em;
+  overflow-x: auto;
+  border-radius: 0.5em;
 }
-/*idもの。 大きな外観*/
+
+/* ──────────────────────────────────────────────── */
+/* ⑤ セクション別スタイル（ID・クラス）                 */
+/* ──────────────────────────────────────────────── */
+/* タイトルセクション */
 #title {
-    background: linear-gradient(90deg,#313131,#000);
-    margin: 0;
-    padding: 2em 2em 2em 2em;
-    font-size: xx-large;
+  background-color: var(--title-bg);
+  margin: 0;
+  padding: 2em;
+  font-size: xx-large;
+  color: var(--text-color);
 }
+
+/* 記事セクション */
 #article {
-    max-width: 720px; 
-    width: 90%;
-    background-color: #313131;
-    margin: auto;
-    border-radius: 20px;
-    padding: 0.5em;
-    color: white;
-    box-shadow: 0 0 4px 0px #131313;
+  max-width: 720px;
+  width: 85%;
+  background-color: var(--section-bg);
+  margin: auto;
+  border-radius: 20px;
+  padding: 0.5em;
+  color: var(--article-text);
+  box-shadow: 0 0 4px 0px rgba(0,0,0,0.5);
 }
+
+/* フッター全体 */
 #footer {
-    background-color: #313131;
-    margin: 0;
-    padding: 1em 2em 1em 2em;
-    color: white;
-    text-align: center;
+  background-color: var(--footer-bg);
+  display: flex;
+  padding: 1em 10%;
+  color: var(--footer-text);
 }
-/*classもの。 小さな外観*/
+
+/* 左カラム */
+#footer .footer-left {
+  flex: 3;
+  padding: 20px;
+  border-right: 2px solid var(--footer-border);
+}
+#footer .footer-left h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+#footer .footer-left p {
+  font-size: 1em;
+  line-height: 2;
+}
+
+/* 右カラム（メニュー） */
+#footer .footer-right {
+  flex: 4;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+#footer .footer-menu {
+  text-align: left;
+}
+#footer .footer-menu h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+#footer .footer-menu ul {
+  list-style: disc;
+  padding-left: 1em;
+  font-size: 1.3rem;
+}
+#footer .footer-menu li {
+  margin-bottom: 10px;
+}
+#footer .footer-menu a {
+  text-decoration: underline;
+  color: var(--footer-text);
+}
+
+/* 小さな外観用クラス */
 .center {
-    display: block;
-    text-align: center;
-    margin: auto;
+  display: block;
+  text-align: center;
+  margin: auto;
 }
 .title {
-    margin: 1em 0.5em 1em 0.5em;
-    padding-left: 0.3em;
-    border-left: 4px solid #fff;
+  margin: 1em 0.5em;
+  padding-left: 0.3em;
+  border-left: 4px solid var(--text-color);
 }
 .gray {
-    color: gray;
+  color: gray;
 }
 .white {
-    color: white;
+  color: white;
 }
 .black {
-    color: black;
+  color: black;
 }
