@@ -1,10 +1,10 @@
 /* ──────────────────────────────────────────────── */
-/* ① フォント読み込み                                 */
+/* フォント読み込み                                 */
 /* ──────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap');
 
 /* ──────────────────────────────────────────────── */
-/* ② 変数定義（ここを編集すれば全体の色味を調整可能！） */
+/* 変数定義                                         */
 /* ──────────────────────────────────────────────── */
 :root {
   /* 基本レイアウト */
@@ -14,8 +14,8 @@
   /* ライトテーマ（デフォルト） */
   --bg-color: #ffffff;             /* ページ背景 */
   --text-color: #000000;           /* 文字色 */
-  --link-color: #0066cc;           /* リンク */
-  --link-hover-color: #0055aa;     /* リンクホバー */
+  --link-color: #007fff;           /* リンク */
+  --link-hover-color: #0072e6;     /* リンクホバー */
   --link-visited-color: #663399;   /* リンク訪問後 */
 
   /* コンポーネント背景 */
@@ -35,27 +35,72 @@
 }
 
 /* ──────────────────────────────────────────────── */
-/* ③ ダークテーマの上書き（data-theme またはシステム設定に対応） */
+/* ダークテーマの上書き                             */
 /* ──────────────────────────────────────────────── */
 /* HTMLに data-theme="dark" が付与された場合 */
 :root[data-theme="dark"] {
   --bg-color: #202020;
   --text-color: #ffffff;
-  --link-color: #58c;
-  --link-hover-color: #47b;
-  --link-visited-color: #a9f;
+  --link-color: #518ccc;
+  --link-hover-color: #447fba;
+  --link-visited-color: #aa9fff;
 
   --code-bg: #202020;
   --section-bg: #313131;
   --title-bg: #1f1f1f;
-  --footer-bg: #000000;
+  --footer-bg: #dddddd;
   --footer-border: #313131;
 
   --article-text: #ffffff;
-  --footer-text: #ffffff;
+  --footer-text: #000000;
 
   --border-color: #ffffff;
 }
+
+/* ─────────────────────────────── */
+/* カラーバリエーションテーマ：ダークレッド */
+/* ─────────────────────────────── */
+:root[data-theme="dark-red"] {
+  --bg-color: #202020;
+  --text-color: #ffffff;
+  --link-color: #ff0000;
+  --link-hover-color: #cc0000;
+  --link-visited-color: #cc0066;
+
+  --code-bg: #202020;
+  --section-bg: #313131;
+  --title-bg: #1f1f1f;
+  --footer-bg: #dddddd;
+  --footer-border: #313131;
+
+  --article-text: #ffffff;
+  --footer-text: #000000;
+
+  --border-color: #ffffff;
+}
+
+/* ─────────────────────────────── */
+/* カラーバリエーションテーマ：ダークグリーン */
+/* ─────────────────────────────── */
+:root[data-theme="dark-green"] {
+  --bg-color: #202020;
+  --text-color: #ffffff;
+  --link-color: #00ff00;
+  --link-hover-color: #00cc00;
+  --link-visited-color: #00cc66;
+
+  --code-bg: #202020;
+  --section-bg: #313131;
+  --title-bg: #1f1f1f;
+  --footer-bg: #dddddd;
+  --footer-border: #313131;
+
+  --article-text: #ffffff;
+  --footer-text: #000000;
+
+  --border-color: #ffffff;
+}
+
 
 /* システムのダークモード設定にも自動対応 */
 @media (prefers-color-scheme: dark) {
