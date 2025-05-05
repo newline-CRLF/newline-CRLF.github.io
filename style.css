@@ -170,9 +170,20 @@ code, pre {
 #title {
   background-color: var(--title-bg);
   margin: 0;
-  padding: 2em;
-  font-size: xx-large;
+  padding: 0;
   color: var(--text-color);
+  border-bottom: solid 2px var(--border-color);
+  text-align: center;
+}
+
+#header-title {
+  margin: 0;
+  padding: 1em;
+  font-size: 4em;
+}
+
+#header-link {
+  background-color: var(--section-bg);
 }
 
 /* 記事セクション */
