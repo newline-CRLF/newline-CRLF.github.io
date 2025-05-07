@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetDiv = document.getElementById('accessCounter');
         if (targetDiv) {
             targetDiv.innerHTML = `
-                <img src="https://counter.256server.com/crlf?theme=moebooru" class="center" alt="アクセスカウンター">
+                <img src="https://count.getloli.com/@CR-LF?name=CR-LF&theme=gelbooru&padding=8&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" class="center" alt="アクセスカウンター" width="33%">
                 <p class="gray center">↑アクセスカウンター</p>
             `;
         }
