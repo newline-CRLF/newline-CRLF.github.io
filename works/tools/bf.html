@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Brainfuck Interpreter</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    textarea, input, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .output {
+      background: #fff;
+      min-height: 100px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      padding: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Brainfuck インタプリタ</h1>
+
+  <label for="code">コード:</label>
+  <textarea id="code" rows="10" placeholder="Brainfuckコードをここに入力してね！"></textarea>
+
+  <label for="input">入力（`,`コマンド用）:</label>
+  <input id="input" placeholder="文字列を入力してね">
+
+  <button onclick="runBrainfuck()">▶ 実行</button>
+
+  <h2>出力:</h2>
+  <div id="output" class="output"></div>
+
+  <script>
+    function runBrainfuck() {
+      const code = document.getElementById('code').value;
+      const input = document.getElementById('input').value;
+      const output = document.getElementById('output');
+      const memory = new Array(30000).fill(0);
+      let pointer = 0;
+      let inputPointer = 0;
+      let result = '';
+      let stack = [];
+      let loopMap = {};
+
+      // 1. ループ位置のマッピング作成
+      for (let i = 0; i < code.length; i++) {
+        if (code[i] === '[') {
+          stack.push(i);
+        } else if (code[i] === ']') {
+          const start = stack.pop();
+          loopMap[start] = i;
+          loopMap[i] = start;
+        }
+      }
+
+      // 2. コード実行
+      for (let i = 0; i < code.length; i++) {
+        const command = code[i];
+        switch (command) {
+          case '>':
+            pointer++;
+            if (pointer >= memory.length) pointer = 0;
+            break;
+          case '<':
+            pointer--;
+            if (pointer < 0) pointer = memory.length - 1;
+            break;
+          case '+':
+            memory[pointer] = (memory[pointer] + 1) % 256;
+            break;
+          case '-':
+            memory[pointer] = (memory[pointer] + 255) % 256;
+            break;
+          case '.':
+            result += String.fromCharCode(memory[pointer]);
+            break;
+          case ',':
+            if (inputPointer < input.length) {
+              memory[pointer] = input.charCodeAt(inputPointer++);
+            } else {
+              memory[pointer] = 0;
+            }
+            break;
+          case '[':
+            if (memory[pointer] === 0) {
+              i = loopMap[i];
+            }
+            break;
+          case ']':
+            if (memory[pointer] !== 0) {
+              i = loopMap[i];
+            }
+            break;
+          default:
+            // 無視（コメント扱い）
+            break;
+        }
+      }
+
+      output.textContent = result;
+    }
+  </script>
+
+</body>
+</html>

@@ -2,7 +2,8 @@
 <html lang="ja">
     <head>
         <title>CR-LFのホームページ</title>
-        <link href="../../style.css" rel="stylesheet" type="text/css" /><!--要パス変更-->
+        <script src="/mode.js" type="text/javascript" async></script>
+        <link id="css-link" href="/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div id="title">
@@ -17,9 +18,48 @@
         </div>
         <br/>
         <div id="footer">
-            <p>&copy; CR-LF 2025- </p>
-            <p>このサイトのコンテンツは特に記載がない限り<a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a>で提供されています。</p>
-            <a href="../../index.html">HOME</a><!--要パス変更-->
+            <div class="footer-left">
+                <h1 class="site-name">CR-LFのホームページ</h1>
+                <p class="site-description">
+                    当ページはCR-LFが自由にブログを書いたり自作のプログラムを公開したりするものです。<br/>
+                    利用規約に同意のもとサービスおよびコンテンツをご利用ください。<br/>
+                    特段の記載がない限りこのサイトは<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>で提供されています。<br/>
+                    &copy; CR-LF 2025-
+                </p>
+                <select id="theme-selector">
+                    <option value="auto">システム設定</option>
+                    <option value="white">ライトモード</option>
+                    <option value="dark">ダークモード</option>
+                    <option value="dark-red">ダークレッドモード</option>
+                    <option value="dark-green">ダークグリーンモード</option>
+                </select>
+            </div>
+            <div class="footer-right">
+                <div class="footer-menu">
+                    <h3>ブログ</h3>
+                    <ul>
+                        <li><a href="/blog/">ブログメインページ</a></li>
+                        <li><a href="/blog/index.html">日記等のページ</a></li>
+                        <li><a href="/blog/programming/">プログラミング関係のページ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-menu">
+                    <h3>サービス</h3>
+                    <ul>
+                        <li><a href="/works/tools/textarea.html">メモ帳</a></li>
+                        <li><a href="#">準備中</a></li>
+                        <li><a href="#">準備中</a></li>
+                    </ul>
+                </div>
+                <div class="footer-menu">
+                    <h3>その他</h3>
+                    <ul>
+                        <li><a href="/index.html">HOME</a></li>
+                        <li><a href="/terms.html">利用規約</a></li>
+                        <li><a href="#">サイトマップ</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </body>
 </html>

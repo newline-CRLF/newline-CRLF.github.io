@@ -24,6 +24,9 @@
         h1 {
             font-weight: 400;
         }
+        a {
+            color: #440000;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +38,8 @@
     <button onclick="downloadText()">ダウンロード</button>
     <input type="file" id="fileInput" accept="text/*" onchange="openFile()">
     <button onclick="document.getElementById('fileInput').click()">ファイルを開く</button>
-
+    <br>
+    <a href="/index.html">HOME</a>
     <script>
         // テキストをダウンロードする関数
         function downloadText() {
