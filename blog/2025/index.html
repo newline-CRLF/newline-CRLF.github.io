@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--Template ver2.0.0 大幅改定-->
 <html lang="ja">
     <head>
         <title>CR-LFのホームページ</title>
@@ -6,15 +7,20 @@
         <link id="css-link" href="/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
+        <noscript>JavaScriptが無効になっているため一部機能が機能しません。</noscript> 
         <div id="title">
-            <h1 class="white center">CR-LF's Home page</h1>
+            <h1 id="header-title">CR-LF's Home page</h1>
+            <div id="header-link">
+                <a href="./blog/">ブログ</a>|<a href="./works/">作品</a>
+            </div>
         </div>
         <br />
         <div id="article">
-            <h1 class="title">ブログ開設しました!</h1>
-            <p>2025/4/13</p>
-            <hr />
-            <p>ブログを開設しました! これからより発展させていきます。備忘録的なものや日記的なものを作ります。</p>
+            <h1 class="title">2025年</h1>
+            <ul>
+                <a href="./2025-5/">2025年5月</a>
+                <a href="./2025-4/">2025年4月</a>
+            </ul>
         </div>
         <br/>
         <div id="footer">
@@ -38,15 +44,15 @@
                 <div class="footer-menu">
                     <h3>ブログ</h3>
                     <ul>
-                        <li><a href="/blog/">ブログメインページ</a></li>
-                        <li><a href="/blog/index.html">日記等のページ</a></li>
-                        <li><a href="/blog/programming/">プログラミング関係のページ</a></li>
+                        <li><a href="./blog/">ブログメインページ</a></li>
+                        <li><a href="./blog/index.html">日記等のページ</a></li>
+                        <li><a href="./blog/programming/">プログラミング関係のページ</a></li>
                     </ul>
                 </div>
                 <div class="footer-menu">
                     <h3>サービス</h3>
                     <ul>
-                        <li><a href="/works/tools/textarea.html">メモ帳</a></li>
+                        <li><a href="./works/tools/textarea.html">メモ帳</a></li>
                         <li><a href="#">準備中</a></li>
                         <li><a href="#">準備中</a></li>
                     </ul>
@@ -54,8 +60,8 @@
                 <div class="footer-menu">
                     <h3>その他</h3>
                     <ul>
-                        <li><a href="/index.html">HOME</a></li>
-                        <li><a href="/terms.html">利用規約</a></li>
+                        <li><a href="./">HOME</a></li>
+                        <li><a href="./terms.html">利用規約</a></li>
                         <li><a href="#">サイトマップ</a></li>
                     </ul>
                 </div>
