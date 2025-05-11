@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>高速 Brainfuck インタプリタ</title>
+  <title>高速 Brainfuck インタプリタ (最適化版)</title>
   <style>
     body { font-family: sans-serif; margin: 2rem; display: flex; flex-direction: column; gap: 1rem; }
     textarea, pre { width: 100%; box-sizing: border-box; font-family: monospace; font-size: 1rem; padding: 0.5rem; }
@@ -15,7 +15,7 @@
   </style>
 </head>
 <body>
-  <h1>高速 Brainfuck インタプリタ</h1>
+  <h1>高速 Brainfuck インタプリタ (最適化版)</h1>
   <label>コード:</label>
   <textarea id="code" placeholder="Brainfuck コードをここに貼り付け"></textarea>
   <label>入力 (オプション):</label>
@@ -28,7 +28,6 @@
   <pre id="output"></pre>
 
   <script>
-    // テープサイズと初期化
     const TAPE_SIZE = 30000;
     let tape, ptr;
 
@@ -38,53 +37,70 @@
       document.getElementById('output').textContent = '';
     }
 
-    // 括弧対応解析
-    function buildBracketMap(code) {
+    // コードを命令に最適化してパース
+    function parse(code) {
+      const ops = [];
+      const raw = code.replace(/[^\[\]<>+\-.,]/g, '');
+      let i = 0;
+      while (i < raw.length) {
+        const c = raw[i];
+        if (c === '+' || c === '-' || c === '>' || c === '<') {
+          let count = 1;
+          const cmd = c;
+          while (i + 1 < raw.length && raw[i + 1] === cmd) { count++; i++; }
+          ops.push({ op: cmd, n: count });
+        } else if ((c === '[' || c === ']') && raw.substr(i,3) === '[-]') {
+          // セルクリアパターン
+          ops.push({ op: '0' });
+          i += 2;
+        } else if (c === '[' || c === ']' || c === '.' || c === ',') {
+          ops.push({ op: c });
+        }
+        i++;
+      }
+      // ブラケットマップ作成
       const map = new Map();
       const stack = [];
-      for (let i = 0; i < code.length; i++) {
-        const c = code[i];
-        if (c === '[') stack.push(i);
-        if (c === ']') {
+      ops.forEach((inst, idx) => {
+        if (inst.op === '[') stack.push(idx);
+        if (inst.op === ']') {
           const start = stack.pop();
-          map.set(start, i);
-          map.set(i, start);
+          map.set(start, idx);
+          map.set(idx, start);
         }
-      }
-      return map;
+      });
+      return { ops, map };
     }
 
-    // 実行
-    function runBrainfuck(code, inputStr) {
+    function run(ops, map, inputStr) {
       const outputElem = document.getElementById('output');
-      const bracketMap = buildBracketMap(code);
       let inputPtr = 0;
       let output = '';
-      for (let pc = 0; pc < code.length; pc++) {
-        switch (code[pc]) {
-          case '>': ptr = (ptr + 1) % TAPE_SIZE; break;
-          case '<': ptr = (ptr - 1 + TAPE_SIZE) % TAPE_SIZE; break;
-          case '+': tape[ptr] = (tape[ptr] + 1) & 0xFF; break;
-          case '-': tape[ptr] = (tape[ptr] - 1 + 256) & 0xFF; break;
+      for (let pc = 0; pc < ops.length; pc++) {
+        const inst = ops[pc];
+        switch (inst.op) {
+          case '>': ptr = (ptr + inst.n) % TAPE_SIZE; break;
+          case '<': ptr = (ptr - inst.n + TAPE_SIZE) % TAPE_SIZE; break;
+          case '+': tape[ptr] = (tape[ptr] + inst.n) & 0xFF; break;
+          case '-': tape[ptr] = (tape[ptr] - inst.n + 256) & 0xFF; break;
+          case '0': tape[ptr] = 0; break;
           case '.': output += String.fromCharCode(tape[ptr]); break;
           case ',': tape[ptr] = inputPtr < inputStr.length ? inputStr.charCodeAt(inputPtr++) : 0; break;
           case '[':
-            if (tape[ptr] === 0) pc = bracketMap.get(pc);
+            if (tape[ptr] === 0) pc = map.get(pc);
             break;
           case ']':
-            if (tape[ptr] !== 0) pc = bracketMap.get(pc);
+            if (tape[ptr] !== 0) pc = map.get(pc);
             break;
         }
       }
       outputElem.textContent = output;
     }
 
-    // イベント
     document.getElementById('run').addEventListener('click', () => {
       init();
-      const code = document.getElementById('code').value.replace(/[^\[\]<>+\-.,]/g, '');
-      const input = document.getElementById('input').value;
-      runBrainfuck(code, input);
+      const { ops, map } = parse(document.getElementById('code').value);
+      run(ops, map, document.getElementById('input').value);
     });
 
     document.getElementById('reset').addEventListener('click', () => {
@@ -93,7 +109,6 @@
       document.getElementById('input').value = '';
     });
 
-    // 初期化
     init();
   </script>
 </body>
