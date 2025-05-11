@@ -1,0 +1,9 @@
+* {
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+body {
+    background-color: #ffdbe0;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    color: #31202c;
+}
