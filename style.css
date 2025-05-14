@@ -201,6 +201,13 @@ code, pre {
   text-align: center;
 }
 
+#flex {
+  display: flex;
+  max-width: 1024px;
+  width: 85%;
+  margin: auto;
+}
+
 #header-title {
   margin: 0;
   padding: 1em;
@@ -213,14 +220,23 @@ code, pre {
 
 /* 記事セクション */
 #article {
-  max-width: 720px;
-  width: 85%;
+  flex: 3;
   background-color: var(--section-bg);
-  margin: auto;
   border-radius: 20px;
   padding: 0.5em;
   color: var(--article-text);
   box-shadow: 0 0 4px 0px rgba(0,0,0,0.5);
+  margin: 0 0.5em;
+}
+
+#side {
+  flex: 1;
+  background-color: var(--section-bg);
+  border-radius: 20px;
+  padding: 0.5em;
+  color: var(--article-text);
+  box-shadow: 0 0 4px 0px rgba(0,0,0,0.5);
+  margin: 0 0.5em;
 }
 
 /* フッター全体 */
