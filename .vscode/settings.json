@@ -4,5 +4,12 @@
         "plaintext": false,
         "markdown": false,
         "scminput": false
-    }
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.tabSize": 4, // タブサイズを4に
+    "editor.detectIndentation": false, // 自動検出を無効化
+    "editor.insertSpaces": true, // タブキーでスペースを挿入
+    "prettier.tabWidth": 4 // Prettierのタブサイズを明示（保険）
 }
