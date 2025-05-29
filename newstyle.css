@@ -1,7 +1,9 @@
 /* スクロールバー全体 */
 ::-webkit-scrollbar {
-    width: 6px; /* 縦スクロールバーの幅 */
-    height: 6px; /* 横スクロールバーの高さ */
+    width: 6px;
+    /* 縦スクロールバーの幅 */
+    height: 6px;
+    /* 横スクロールバーの高さ */
 }
 
 /* スクロールバーの背景（トラック部分） */
@@ -35,27 +37,61 @@
     --line-height: 2em;
 
     /* ライトテーマ（デフォルト） */
-    --bg-color: #ffffff; /* ページ背景 */
-    --text-color: #000000; /* 文字色 */
-    --link-color: #007fff; /* リンク */
-    --link-hover-color: #0072e6; /* リンクホバー */
-    --link-visited-color: #663399; /* リンク訪問後 */
+    --bg-color: #ffffff;
+    /* ページ背景 */
+    --text-color: #000000;
+    /* 文字色 */
+    --link-color: #007fff;
+    /* リンク */
+    --link-hover-color: #0072e6;
+    /* リンクホバー */
+    --link-visited-color: #663399;
+    /* リンク訪問後 */
 
     /* コンポーネント背景 */
-    --code-bg: #f5f5f5; /* code, pre 背景 */
-    --section-bg: #f0f0f0; /* #article 背景 */
-    --title-bg: #f0f0f0; /* #title 背景 */
-    --footer-bg: #000000; /* #footer 背景 */
-    --footer-border: #dddddd; /* footer 左カラム境界線 */
+    --code-bg: #f5f5f5;
+    /* code, pre 背景 */
+    --section-bg: #f0f0f0;
+    /* #article 背景 */
+    --title-bg: #f0f0f0;
+    /* #title 背景 */
+    --footer-bg: #000000;
+    /* #footer 背景 */
+    --footer-border: #dddddd;
+    /* footer 左カラム境界線 */
 
     /* テキスト on セクション */
-    --article-text: #000000; /* #article 内文字色 */
-    --footer-text: #ffffff; /* footer 内文字色 */
+    --article-text: #000000;
+    /* #article 内文字色 */
+    --footer-text: #ffffff;
+    /* footer 内文字色 */
 
     /* その他 */
-    --border-color: #cccccc; /* table 等の境界線 */
-    --transition: 0.3s ease; /* カラー切り替えトランジション */
+    --border-color: #cccccc;
+    /* table 等の境界線 */
+    --transition: 0.3s ease;
+    /* カラー切り替えトランジション */
 }
+
+/* ──────────────────────────────────────────────── */
+/* 幅によるレスポンシブ対応                     */
+/* ──────────────────────────────────────────────── */
+@media screen and (max-width: 1279px) {
+    #side {
+        display: none;
+    }
+
+    #article {
+        flex: 1;
+        margin: auto;
+        width: 90%;
+    }
+
+    #flex {
+        max-width: 720px !important;
+    }
+}
+
 
 /* ──────────────────────────────────────────────── */
 /* ダークテーマの上書き                             */
@@ -163,9 +199,11 @@ a {
     text-decoration: none;
     transition: color var(--transition);
 }
+
 a:hover {
     color: var(--link-hover-color);
 }
+
 a:visited {
     color: var(--link-visited-color);
 }
@@ -173,6 +211,7 @@ a:visited {
 table {
     border-collapse: collapse;
 }
+
 th,
 td {
     border: var(--border-color) 1px solid;
@@ -253,10 +292,12 @@ pre {
     padding: 20px;
     border-right: 2px solid var(--footer-border);
 }
+
 #footer .footer-left h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
 }
+
 #footer .footer-left p {
     font-size: 1em;
     line-height: 2;
@@ -269,21 +310,26 @@ pre {
     justify-content: space-around;
     padding: 20px;
 }
+
 #footer .footer-menu {
     text-align: left;
 }
+
 #footer .footer-menu h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
+
 #footer .footer-menu ul {
     list-style: disc;
     padding-left: 1em;
     font-size: 1.3rem;
 }
+
 #footer .footer-menu li {
     margin-bottom: 10px;
 }
+
 #footer .footer-menu a {
     text-decoration: underline;
     color: var(--footer-text);
@@ -295,17 +341,21 @@ pre {
     text-align: center;
     margin: auto;
 }
+
 .title {
     margin: 1em 0.5em;
     padding-left: 0.3em;
     border-left: 4px solid var(--text-color);
 }
+
 .gray {
     color: gray;
 }
+
 .white {
     color: white;
 }
+
 .black {
     color: black;
 }
