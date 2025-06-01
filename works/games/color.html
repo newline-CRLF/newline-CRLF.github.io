@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>色当てゲーム</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-box {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #333;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .color-box:hover {
+            transform: scale(1.05);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .color-input {
+            width: 60px;
+            height: 40px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .color-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .color-preview {
+            width: 50px;
+            height: 40px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            margin-left: 10px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .result.good {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result.bad {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .final-result {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            font-size: 18px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .guess-history {
+            margin-top: 20px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .guess-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 5px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .guess-colors {
+            display: flex;
+            gap: 10px;
+            margin-right: 15px;
+        }
+
+        .guess-color-sample {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #333;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>🎨 色当てゲーム</h1>
+
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">ラウンド</div>
+                <div class="info-value" id="round">1/10</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">総スコア</div>
+                <div class="info-value" id="totalScore">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">平均誤差</div>
+                <div class="info-value" id="avgError">-</div>
+            </div>
+        </div>
+
+        <div class="color-box" id="targetColor"></div>
+
+        <div class="controls">
+            <label>R: <input type="number" class="color-input" id="redInput" min="0" max="255" value="128"></label>
+            <label>G: <input type="number" class="color-input" id="greenInput" min="0" max="255" value="128"></label>
+            <label>B: <input type="number" class="color-input" id="blueInput" min="0" max="255" value="128"></label>
+            <div class="color-preview" id="guessPreview"></div>
+        </div>
+
+        <button id="guessBtn">予想を送信</button>
+        <button id="newGameBtn" class="hidden">新しいゲーム</button>
+
+        <div id="result" class="hidden"></div>
+
+        <div class="guess-history hidden" id="guessHistory">
+            <h3>予想履歴</h3>
+            <div id="historyList"></div>
+        </div>
+
+        <div id="finalResult" class="hidden"></div>
+    </div>
+
+    <script>
+        class ColorGuessingGame {
+            constructor() {
+                this.currentRound = 1;
+                this.totalRounds = 10;
+                this.scores = [];
+                this.targetColor = null;
+                this.guessHistory = [];
+
+                this.initElements();
+                this.bindEvents();
+                this.startNewRound();
+            }
+
+            initElements() {
+                this.targetColorBox = document.getElementById('targetColor');
+                this.redInput = document.getElementById('redInput');
+                this.greenInput = document.getElementById('greenInput');
+                this.blueInput = document.getElementById('blueInput');
+                this.guessPreview = document.getElementById('guessPreview');
+                this.guessBtn = document.getElementById('guessBtn');
+                this.newGameBtn = document.getElementById('newGameBtn');
+                this.result = document.getElementById('result');
+                this.finalResult = document.getElementById('finalResult');
+                this.roundDisplay = document.getElementById('round');
+                this.totalScoreDisplay = document.getElementById('totalScore');
+                this.avgErrorDisplay = document.getElementById('avgError');
+                this.guessHistoryDiv = document.getElementById('guessHistory');
+                this.historyList = document.getElementById('historyList');
+            }
+
+            bindEvents() {
+                this.guessBtn.addEventListener('click', () => this.makeGuess());
+                this.newGameBtn.addEventListener('click', () => this.resetGame());
+
+                [this.redInput, this.greenInput, this.blueInput].forEach(input => {
+                    input.addEventListener('input', () => this.updatePreview());
+                    input.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') this.makeGuess();
+                    });
+                });
+
+                this.updatePreview();
+            }
+
+            generateRandomColor() {
+                return {
+                    r: Math.floor(Math.random() * 256),
+                    g: Math.floor(Math.random() * 256),
+                    b: Math.floor(Math.random() * 256)
+                };
+            }
+
+            startNewRound() {
+                this.targetColor = this.generateRandomColor();
+                this.targetColorBox.style.backgroundColor =
+                    `rgb(${this.targetColor.r}, ${this.targetColor.g}, ${this.targetColor.b})`;
+
+                this.roundDisplay.textContent = `${this.currentRound}/${this.totalRounds}`;
+                this.result.classList.add('hidden');
+                this.guessBtn.disabled = false;
+            }
+
+            updatePreview() {
+                const r = Math.max(0, Math.min(255, parseInt(this.redInput.value) || 0));
+                const g = Math.max(0, Math.min(255, parseInt(this.greenInput.value) || 0));
+                const b = Math.max(0, Math.min(255, parseInt(this.blueInput.value) || 0));
+
+                this.guessPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            }
+
+            calculateError(guess, target) {
+                const rDiff = Math.abs(guess.r - target.r);
+                const gDiff = Math.abs(guess.g - target.g);
+                const bDiff = Math.abs(guess.b - target.b);
+                return rDiff + gDiff + bDiff;
+            }
+
+            calculateScore(error) {
+                // 最大誤差は765 (255*3)、100点満点で計算
+                const maxError = 765;
+                return Math.max(0, Math.round(100 - (error / maxError) * 100));
+            }
+
+            makeGuess() {
+                const guess = {
+                    r: Math.max(0, Math.min(255, parseInt(this.redInput.value) || 0)),
+                    g: Math.max(0, Math.min(255, parseInt(this.greenInput.value) || 0)),
+                    b: Math.max(0, Math.min(255, parseInt(this.blueInput.value) || 0))
+                };
+
+                const error = this.calculateError(guess, this.targetColor);
+                const score = this.calculateScore(error);
+                this.scores.push(score);
+
+                // 履歴に追加
+                this.guessHistory.push({
+                    round: this.currentRound,
+                    guess: guess,
+                    target: this.targetColor,
+                    error: error,
+                    score: score
+                });
+
+                this.showResult(guess, error, score);
+                this.updateStats();
+                this.updateHistory();
+
+                this.guessBtn.disabled = true;
+
+                if (this.currentRound < this.totalRounds) {
+                    setTimeout(() => {
+                        this.currentRound++;
+                        this.startNewRound();
+                    }, 3000);
+                } else {
+                    setTimeout(() => this.showFinalResult(), 3000);
+                }
+            }
+
+            showResult(guess, error, score) {
+                const accuracy = error <= 30 ? 'good' : 'bad';
+                this.result.className = `result ${accuracy}`;
+                this.result.innerHTML = `
+                    <div>あなたの予想: RGB(${guess.r}, ${guess.g}, ${guess.b})</div>
+                    <div>正解: RGB(${this.targetColor.r}, ${this.targetColor.g}, ${this.targetColor.b})</div>
+                    <div>誤差: ${error} | スコア: ${score}点</div>
+                `;
+                this.result.classList.remove('hidden');
+            }
+
+            updateStats() {
+                const totalScore = this.scores.reduce((sum, score) => sum + score, 0);
+                const avgError = this.guessHistory.reduce((sum, h) => sum + h.error, 0) / this.guessHistory.length;
+
+                this.totalScoreDisplay.textContent = totalScore;
+                this.avgErrorDisplay.textContent = Math.round(avgError);
+            }
+
+            updateHistory() {
+                const latestGuess = this.guessHistory[this.guessHistory.length - 1];
+                const historyItem = document.createElement('div');
+                historyItem.className = 'guess-item';
+                historyItem.innerHTML = `
+                    <div class="guess-colors">
+                        <div class="guess-color-sample" style="background: rgb(${latestGuess.guess.r}, ${latestGuess.guess.g}, ${latestGuess.guess.b})"></div>
+                        <div class="guess-color-sample" style="background: rgb(${latestGuess.target.r}, ${latestGuess.target.g}, ${latestGuess.target.b})"></div>
+                    </div>
+                    <div>R${latestGuess.round}: 誤差${latestGuess.error} (${latestGuess.score}点)</div>
+                `;
+                this.historyList.appendChild(historyItem);
+                this.guessHistoryDiv.classList.remove('hidden');
+            }
+
+            showFinalResult() {
+                const totalScore = this.scores.reduce((sum, score) => sum + score, 0);
+                const avgScore = totalScore / this.totalRounds;
+                const avgError = this.guessHistory.reduce((sum, h) => sum + h.error, 0) / this.guessHistory.length;
+
+                let grade = '';
+                if (avgScore >= 80) grade = '🏆 マスター';
+                else if (avgScore >= 60) grade = '🥈 上級者';
+                else if (avgScore >= 40) grade = '🥉 中級者';
+                else grade = '📝 初心者';
+
+                this.finalResult.innerHTML = `
+                    <h2>🎉 ゲーム終了！</h2>
+                    <div>総スコア: ${totalScore}/1000点</div>
+                    <div>平均スコア: ${Math.round(avgScore)}点</div>
+                    <div>平均誤差: ${Math.round(avgError)}</div>
+                    <div style="margin-top: 15px; font-size: 24px;">${grade}</div>
+                `;
+                this.finalResult.classList.remove('hidden');
+                this.newGameBtn.classList.remove('hidden');
+            }
+
+            resetGame() {
+                this.currentRound = 1;
+                this.scores = [];
+                this.guessHistory = [];
+                this.finalResult.classList.add('hidden');
+                this.newGameBtn.classList.add('hidden');
+                this.guessHistoryDiv.classList.add('hidden');
+                this.historyList.innerHTML = '';
+                this.totalScoreDisplay.textContent = '0';
+                this.avgErrorDisplay.textContent = '-';
+                this.startNewRound();
+            }
+        }
+
+        // ゲーム開始
+        window.addEventListener('DOMContentLoaded', () => {
+            new ColorGuessingGame();
+        });
+    </script>
+</body>
+
+</html>
