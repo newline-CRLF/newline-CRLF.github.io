@@ -1,0 +1,40 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <rect width="1200" height="630" fill="#0D171D"/>
+
+    <!-- Background grid lines - Scaled and shifted -->
+    <defs>
+        <pattern id="grid" width="21" height="21" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="21" y2="0" stroke="#2f374f" stroke-width="1.05"/>
+            <line x1="0" y1="0" x2="0" y2="21" stroke="#2f374f" stroke-width="1.05"/>
+        </pattern>
+    </defs>
+    <rect x="0" y="0" width="1200" height="630" fill="url(#grid)"/>
+    <!-- Main Content Frame (simulating a window) - Scaled and shifted -->
+    <rect x="114.9" y="52.5" width="970.2" height="525" rx="15.75" ry="15.75" fill="#0D171D7f" stroke="#8f979f" stroke-width="2.1"/>
+
+    <!-- Window Controls - Scaled and shifted -->
+    <g transform="translate(954.9, 78.75)">
+        <rect x="0" y="10" width="21" height="2.1" fill="#8f979f"/> <!-- Minimize -->
+        <rect x="36.75" y="0" width="12.6" height="12.6" rx="2.1" ry="2.1" stroke="#8f979f" stroke-width="2.1" fill="none"/> <!-- Maximize -->
+        <line x1="73.5" y1="0" x2="84" y2="10.5" stroke="#8f979f" stroke-width="2.1"/>
+        <line x1="84" y1="0" x2="73.5" y2="10.5" stroke="#8f979f" stroke-width="2.1"/> <!-- Close -->
+    </g>
+
+    <!-- Logo (Square) - Adjusted position and size -->
+    <!-- 元のロゴの中心を維持しつつ正方形 (90x90) に変更し、位置を調整 -->
+    <rect x="174.9" y="81" width="90" height="90" rx="7" ry="7" fill="#F8F8F8"/>
+    <!-- テキスト「CRLF」を新しい正方形ロゴの中心に配置 -->
+    <text x="219.4" y="131.75" font-family="IBM Plex Sans, sans-serif" font-size="31.5" font-weight="700" fill="#202C26" text-anchor="middle" dominant-baseline="middle">CRLF</text>
+
+    <!-- Main Title - Scaled and shifted -->
+    <text x="156.9" y="246.75" font-family="Playfair Display, serif" font-size="73.5" font-weight="700" fill="#F8F8F8">CR-LF's Pages</text>
+
+    <!-- Subtitle - Scaled and shifted -->
+    <text x="156.9" y="304.5" font-family="IBM Plex Sans, sans-serif" font-size="29.4" fill="#6f777f">Playground for general technical college students</text>
+
+    <!-- Description Lines - Scaled and shifted -->
+    <text x="156.9" y="420" font-family="IBM Plex Sans, sans-serif" font-size="29.4" fill="#F8F8F8">Developer who loves CRLF, a newline code</text>
+    <text x="156.9" y="467.25" font-family="IBM Plex Sans, sans-serif" font-size="29.4" fill="#F8F8F8">Developing web apps mainly in HTML/CSS/JS</text>
+
+</svg>
